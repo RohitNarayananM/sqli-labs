@@ -1,8 +1,8 @@
-## Challenge - 2
+# Challenge - 2
 
 This challenge is similar to the previous one and we have 14 tries to dump the secret key
 
-### Initial Analysis
+## Initial Analysis
 
 Here also we have to find  how the developer has given the query so we try giving id the values
 
@@ -33,17 +33,15 @@ Now we can find table name like in the previous problem using
 ```
 
 which gives us the table name :
-
 **48ov8099bg**
 
-Now we can find the columns in the table using 
+Now we can find the columns in the table using
 
 ```sql
 0) union select 1,2,group_concat(column_name) from information_schema.columns where table_name='48ov8099bg' and table_schema='CHALLENGES'; --+
 ```
 
 we get 4 column names:
-
 **id,sessid,secret_0ZH7,tryy**
 
 The secret key can be in any of these columns but we can always go for the most suspicious one and print the secret key using:
@@ -53,5 +51,4 @@ The secret key can be in any of these columns but we can always go for the most 
 ```
 
 We get the secret key:
-
 **vlKvs6ik1lMqJgA2V3Dk8ZMP**

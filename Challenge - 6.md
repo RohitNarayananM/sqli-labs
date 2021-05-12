@@ -1,12 +1,12 @@
-## Challenge - 6
+# Challenge - 6
 
 This challenge is based on double query injection and we have to use AND in this injection
 
-### Initial Analysis
+## Initial Analysis
 
 First we have to find out how the developer has given the query so we try giving id the value. We can break query using '`\`' Which will give an error
 
-```
+```ABAP
 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '\ LIMIT 0,1' at line 1
 ```
 
@@ -22,7 +22,7 @@ We can check this using id=
 0 or 1=1 --+
 ```
 
-which will give us a login id and password. 
+which will give us a login id and password.
 
 This challenge is similar to the previous one so we can use the same payload
 
@@ -36,7 +36,7 @@ We can get the table name using: id=
 
 It will give the error:
 
-```
+```ABAP
 Duplicate entry ':brswxk4bx6:0' for key 'group_key'
 ```
 
@@ -50,7 +50,7 @@ Now we can get the column name using: id=
 
 Which will give the error:
 
-```
+```ABAP
 Duplicate entry ':secret_MH2B:0' for key 'group_key'
 ```
 
@@ -64,10 +64,9 @@ Now we can get the secret key using : id=
 
 Which will give the error:
 
-```
+```ABAP
 Duplicate entry ':MWEO9IB251RirQPBewbIgCfd:0' for key 'group_key'
 ```
 
 where the key is :
-
 **MWEO9IB251RirQPBewbIgCfd**

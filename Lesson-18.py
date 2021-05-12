@@ -50,4 +50,4 @@ for i in range(4):
 	                if(':' in temp):
 	                    content=temp[temp.index(':')+1:temp.rindex(':')]
 	                    print(content,end=",")
-            	print()e
+            	print()

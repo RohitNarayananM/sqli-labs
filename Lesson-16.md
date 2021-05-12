@@ -89,7 +89,7 @@ for i in table_name:
 
 It gave me:
 
-```
+```ABAP
 Tables :  emails,referers,uagents,users
 
 Columns in table - emails
@@ -113,4 +113,3 @@ Contents :  Dumb,Angelina,Dummy,secure,stupid,superman,batman,admin,admin1,admin
 Conents in column - password
 Contents :  Dumb,I-kill-you,p@ssword,crappy,stupidity,genious,mob!le,admin,admin1,admin2,admin3,dumbo,admin4
 ```
-

